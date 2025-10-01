@@ -46,8 +46,8 @@
       "step": "writeFile",
       "path": "/wordpress/wp-content/plugins/my_custom_plugin/custom.php",
       "data": {
-        "resource": "url",
-        "url": "https://github.com/muryamsultana/mycustomplugin/blob/main/custom.php"
+        "resource": "bundled",
+        "path": "/custom.php"
       }
     },
     {
