@@ -1,6 +1,94 @@
-<item>
-    <title>Inception</title>
-    <wp:post_type>movie</wp:post_type>
-    <wp:post_status>publish</wp:post_status>
-    <content:encoded><![CDATA[<p>A mind-bending sci-fi thriller about dream heists.</p>]]></content:encoded>
-</item>
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+    xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+    <title>Movie Data Export</title>
+    <link>https://example.com</link>
+    <description>Sample movie post type data</description>
+    <pubDate>Sat, 04 Oct 2025 19:37:00 +0000</pubDate>
+    <language>en-US</language>
+    <wp:wxr_version>1.2</wp:wxr_version>
+    <wp:base_site_url>https://example.com</wp:base_site_url>
+    <wp:base_blog_url>https://example.com</wp:base_blog_url>
+    <generator>https://wordpress.org/?v=6.6.2</generator>
+
+    <!-- Movie Post 1: Inception -->
+    <item>
+        <title>Inception</title>
+        <link>https://example.com/movie/inception/</link>
+        <pubDate>Sat, 04 Oct 2025 19:37:00 +0000</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>A thief with the ability to enter dreams and steal secrets faces his toughest challenge yet. Mind-bending twists and stunning visuals make this a sci-fi classic.</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+        <excerpt:encoded><![CDATA[A mind-bending sci-fi thriller about dream heists.]]></excerpt:encoded>
+        <wp:post_id>1</wp:post_id>
+        <wp:post_date>2025-10-04 19:37:00</wp:post_date>
+        <wp:post_date_gmt>2025-10-04 19:37:00</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name>inception</wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>movie</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <wp:postmeta>
+            <wp:meta_key>rating</wp:meta_key>
+            <wp:meta_value><![CDATA[8.8]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>genre</wp:meta_key>
+            <wp:meta_value><![CDATA[Sci-Fi, Thriller]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>year</wp:meta_key>
+            <wp:meta_value><![CDATA[2010]]></wp:meta_value>
+        </wp:postmeta>
+    </item>
+
+    <!-- Movie Post 2: The Matrix -->
+    <item>
+        <title>The Matrix</title>
+        <link>https://example.com/movie/the-matrix/</link>
+        <pubDate>Sat, 04 Oct 2025 19:37:00 +0000</pubDate>
+        <dc:creator><![CDATA[admin]]></dc:creator>
+        <description></description>
+        <content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>A hacker discovers reality is a simulation controlled by machines. Packed with groundbreaking action and philosophical depth.</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+        <excerpt:encoded><![CDATA[A cyberpunk epic questioning reality.]]></excerpt:encoded>
+        <wp:post_id>2</wp:post_id>
+        <wp:post_date>2025-10-04 19:37:00</wp:post_date>
+        <wp:post_date_gmt>2025-10-04 19:37:00</wp:post_date_gmt>
+        <wp:comment_status>open</wp:comment_status>
+        <wp:ping_status>open</wp:ping_status>
+        <wp:post_name>the-matrix</wp:post_name>
+        <wp:status>publish</wp:status>
+        <wp:post_parent>0</wp:post_parent>
+        <wp:menu_order>0</wp:menu_order>
+        <wp:post_type>movie</wp:post_type>
+        <wp:post_password></wp:post_password>
+        <wp:is_sticky>0</wp:is_sticky>
+        <wp:postmeta>
+            <wp:meta_key>rating</wp:meta_key>
+            <wp:meta_value><![CDATA[8.7]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>genre</wp:meta_key>
+            <wp:meta_value><![CDATA[Action, Sci-Fi]]></wp:meta_value>
+        </wp:postmeta>
+        <wp:postmeta>
+            <wp:meta_key>year</wp:meta_key>
+            <wp:meta_value><![CDATA[1999]]></wp:meta_value>
+        </wp:postmeta>
+    </item>
+</channel>
+</rss>
