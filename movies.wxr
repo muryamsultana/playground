@@ -1,0 +1,7 @@
+{
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/your-repo/main/movies.wxr"
+      }
+}
