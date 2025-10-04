@@ -1,4 +1,11 @@
 <?php
+/*
+Plugin Name: Create 'Movie' custom post type
+Description: Create Movies post type
+Version: 1.0.0
+Author: Muryam
+License: GPL-2.0+
+*/
 add_action('init', 'register_movie_post_type');
 
 function register_movie_post_type() {
