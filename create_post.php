@@ -1,4 +1,3 @@
-
 <?php
 add_action('init', 'register_movie_post_type');
 
