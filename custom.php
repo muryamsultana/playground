@@ -3,7 +3,7 @@
 Plugin Name: Fancy Dashboard Widget
 Description: A stylish WordPress dashboard widget with recent posts, user stats, and quick links.
 Version: 1.0.0
-Author: Grok
+Author: Muryam
 License: GPL-2.0+
 */
 
@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 
 class Fancy_Dashboard_Widget {
     public function __construct() {
-        add_action('wp_dashboard_setup', array($this, 'add_dashboard_widget'));
+        add_action('wp_dashboard_setup', array($this, 'add_dashboard_widget'),1);
         add_action('admin_enqueue_scripts', array($this, 'enqueue_styles'));
     }
 
@@ -25,7 +25,10 @@ class Fancy_Dashboard_Widget {
             'Fancy Dashboard Overview',
             array($this, 'render_widget_content')
         );
-        // Get the regular dashboard widgets array 
+          // Globalize the metaboxes array, this holds all the widgets for wp-admin.
+    	global $wp_meta_boxes;
+    	
+    	// Get the regular dashboard widgets array 
     	// (which already has our new widget but appended at the end).
     	$default_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
     	
