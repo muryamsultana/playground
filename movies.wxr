@@ -1,7 +1,9 @@
-{
-      "step": "importWxr",
-      "file": {
-        "resource": "url",
-        "url": "https://raw.githubusercontent.com/your-repo/main/movies.wxr"
-      }
-}
+<item>
+    <title>Inception</title>
+    <wp:post_type>movie</wp:post_type>
+    <wp:post_status>publish</wp:post_status>
+    <content:encoded><![CDATA[<p>A mind-bending sci-fi thriller about dream heists.</p>]]></content:encoded>
+    <wp:custom_fields>
+        <wp:meta_key>rating</wp:meta_key><wp:meta_value>8.8</wp:meta_value>
+    </wp:custom_fields>
+</item>
