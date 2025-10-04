@@ -6,6 +6,10 @@ Version: 1.0.0
 Author: Muryam
 License: GPL-2.0+
 */
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
 add_action('init', 'register_movie_post_type');
 
 function register_movie_post_type() {
