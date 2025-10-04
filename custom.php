@@ -25,6 +25,19 @@ class Fancy_Dashboard_Widget {
             'Fancy Dashboard Overview',
             array($this, 'render_widget_content')
         );
+        // Get the regular dashboard widgets array 
+    	// (which already has our new widget but appended at the end).
+    	$default_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+    	
+    	// Backup and delete our new dashboard widget from the end of the array.
+    	$gt_dashboard_backup = array( 'fancy_dashboard_widget' => $default_dashboard['fancy_dashboard_widget'] );
+    	unset( $default_dashboard['fancy_dashboard_widget'] );
+     
+    	// Merge the two arrays together so our widget is at the beginning.
+    	$sorted_dashboard = array_merge( $gt_dashboard_backup, $default_dashboard );
+     
+    	// Save the sorted array back into the original metaboxes. 
+    	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
     }
 
     // Enqueue Tailwind CSS
