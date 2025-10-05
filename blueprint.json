@@ -53,6 +53,29 @@
     {
       "step": "activatePlugin",
       "pluginPath": "my_custom_plugin/custom.php"
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/plugins/custom_post_movie"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/plugins/custom_post_movie/movie.php",
+      "data": {
+        "resource": "url",
+        "url": "https://github.com/muryamsultana/playground/blob/main/create_post.php"
+      }
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "custom_post_movie/movie.php"
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://github.com/muryamsultana/playground/blob/main/movies.wxr"
+      }
     }
   ]
 }
