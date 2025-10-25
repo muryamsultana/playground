@@ -15,7 +15,7 @@ class OpenWeather_Shortcode {
     public $api_key_option = 'openweather_api_key';
     public $key =  'bdabe763ab4c3757cd2754c5af5148ec';
 
-    public function __construct($key) {
+    public function __construct() {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
