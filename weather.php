@@ -126,7 +126,7 @@ if (is_wp_error($post_id)) {
     error_log('Post created successfully with ID: ' . $post_id);
 }
 
-
+?>
 // Hook to run on admin init (for safety; remove if running manually)
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
