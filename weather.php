@@ -25,16 +25,11 @@ class WeatherPlugin {
         $resposne = wp_remote_get($url);
 
         if (is_wp_error($response)) return 'Error fetching weather data'; 
-            $data = json_decode(wp_remote_retrieve_body($response));
+        
+        $data = json_decode(wp_remote_retrieve_body($response));
         
         if (!$data || !isset($data->main)) return 'Invalid city';
-            $data = json_decode(wp_remote_retrieve_body($response), true);
-        
-        if (json_last_error() !== JSON_ERROR_NONE || !isset($data['main'])) {
-            error_log("Invalid JSON from Weather API");
-            return false;
-        }
-
+    
         return $data;
     }
 
