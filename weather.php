@@ -22,11 +22,11 @@ class WeatherPlugin {
     public function getWeather($city, $units = 'metric') {
         $url = $this->apiUrl . '?q=' . urlencode($city) . '&appid=' . $this->apiKey . '&units=' . $units;
 
-        $data = wp_remote_get($url);
+       // $data = wp_remote_get($url);
         
        // $data = json_decode(wp_remote_retrieve_body($response));
         
-    
+        $data = '';
         return $data;
     }
 
