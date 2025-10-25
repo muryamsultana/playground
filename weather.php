@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 
 class OpenWeather_Shortcode {
     private $api_key_option = 'openweather_api_key';
-    private $key =  'bdabe763ab4c3757cd2754c5af5148ec'
+    private $key =  'bdabe763ab4c3757cd2754c5af5148ec';
 
     public function __construct() {
         add_action('admin_menu', [$this, 'add_settings_page']);
