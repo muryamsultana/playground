@@ -23,7 +23,6 @@ class OpenWeather_Shortcode {
 
     // Add settings page
     public function add_settings_page() {
-        update_option($this->api_key_option, $this->key);
         add_options_page(
             'OpenWeatherAPI Settings',
             'OpenWeatherAPI',
@@ -61,7 +60,7 @@ class OpenWeather_Shortcode {
 
     // Enqueue CSS
     public function enqueue_styles() {
-        add_action('admin_menu', [$this, 'add_settings_page']);
+        update_option($this->api_key_option, $this->key);
         wp_enqueue_style(
             'openweather-styles',
             plugin_dir_url(__FILE__) . 'openweather-styles.css',
