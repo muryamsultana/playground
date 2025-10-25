@@ -57,7 +57,7 @@ function weatherapi_shortcode_handler($atts) {
     ), $atts);
 
     $city = sanitize_text_field($atts['city']);
-    $key = 'bdabe763ab4c3757cd2754c5af5148ec';
+   $key = get_option("weatherapi_key", '');
 
     if (empty($key)) {
         return '<p><strong>WeatherAPI Error:</strong> Please enter your API key in Settings > WeatherAPI.</p>';
