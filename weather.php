@@ -79,18 +79,27 @@ class WeatherPlugin {
         $units = in_array($atts['units'], $validUnits) ? $atts['units'] : 'metric';
 
         // Fetch weather data
-        $weatherData = $this->getWeather($atts['city'], $units);
-        if ($weatherData) {
-            $weatherData['units'] = $units; // Pass units for rendering
-        }
-
-        return $this->renderWeather($weatherData);
+        return $this->getWeather($atts['city'], $units);
+  
+       
     }
 }
 // Example Usage (uncomment and customize)
 $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
 add_shortcode('weather', [$plugin, 'weatherShortcode']);
 
+$post_data = array(
+    'post_title'    => 'Current Weather Update',
+    'post_content'  => '[weather city="London" units="metric"]', // Customize shortcode here
+    'post_status'   => 'publish', // Or 'draft' for review
+    'post_type'     => 'post',    // Or 'page' if needed
+    'post_author'   => 1,         // Default admin user ID; change as needed
+    'post_category' => array(1),  // Array of category IDs; optional
+);
+
+// Insert the post
+$post_id = wp_insert_post($post_data);
+    // Post data
 
 
 
