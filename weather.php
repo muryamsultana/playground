@@ -81,7 +81,7 @@ class WeatherPlugin {
 
 // Example Usage (uncomment and customize)
  $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
- add_shortcode('weather', [$plugin, 'handleShortcode']);
+ add_shortcode('weather', [$plugin, 'getWeather']);
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
 ?>
