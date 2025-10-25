@@ -85,7 +85,7 @@ $atts = shortcode_atts([
         }
 
         // Enqueue styles
-        wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
+        //wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
 
         return $this->displayWeather($weatherData);
   
