@@ -1,4 +1,4 @@
-<?php
+    <?php
 /*
 Plugin Name: PHP Weather Plugin using OpenWeatherMap API
 Description: API for waether
@@ -22,22 +22,14 @@ class WeatherPlugin {
     public function getWeather($city, $units = 'metric') {
         $url = $this->apiUrl . '?q=' . urlencode($city) . '&appid=' . $this->apiKey . '&units=' . $units;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For testing; enable in production
+        $resposne = wp_remote_get($url);
 
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
-
-        if ($error || $httpCode !== 200) {
-            error_log("Weather API Error: " . ($error ?: "HTTP $httpCode"));
-            return false;
-        }
-
-        $data = json_decode(wp_remote_retrieve_body($response), true);
+        if (is_wp_error($response)) return 'Error fetching weather data'; 
+            $data = json_decode(wp_remote_retrieve_body($response));
+        
+        if (!$data || !isset($data->main)) return 'Invalid city';
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+        
         if (json_last_error() !== JSON_ERROR_NONE || !isset($data['main'])) {
             error_log("Invalid JSON from Weather API");
             return false;
