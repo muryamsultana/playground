@@ -102,11 +102,8 @@ class WeatherPlugin {
         return $this->renderWeather($weatherData);
     }
 }
-
-
 // Example Usage (uncomment and customize)
 $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
-$atts = shortcode_atts(['city' => 'London'], $atts);
 add_shortcode('weather', [$plugin, 'weatherShortcode']);
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
