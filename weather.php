@@ -79,7 +79,7 @@ class WeatherPlugin {
         $units = in_array($atts['units'], $validUnits) ? $atts['units'] : 'metric';
 
         // Fetch weather data
-        return $this->getWeather($atts['city'], $units);
+        return $this->displayWeather($this->getWeather($atts['city'], $units));
   
        
     }
