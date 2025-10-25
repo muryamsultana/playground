@@ -19,13 +19,6 @@ class WeatherPlugin {
         $this->apiKey = $apiKey;
     }
 
-    /**
-     * Fetch and display current weather for a city.
-     * 
-     * @param string $city The city name (e.g., 'London')
-     * @param string $units Units: 'metric' (Celsius), 'imperial' (Fahrenheit), or 'standard' (Kelvin). Default: 'metric'
-     * @return array|bool Weather data array or false on error
-     */
     public function getWeather($city, $units = 'metric') {
         $url = $this->apiUrl . '?q=' . urlencode($city) . '&appid=' . $this->apiKey . '&units=' . $units;
 
@@ -53,11 +46,6 @@ class WeatherPlugin {
         return $data;
     }
 
-    /**
-     * Display weather in a simple HTML format.
-     * 
-     * @param array $weatherData The data from getWeather()
-     */
     public function displayWeather($weatherData) {
         if (!$weatherData) {
             echo '<p class="weather-error">Unable to fetch weather data. Check your API key or city name.</p>';
@@ -126,7 +114,7 @@ if (is_wp_error($post_id)) {
     error_log('Post created successfully with ID: ' . $post_id);
 }
 
-?>
+
 // Hook to run on admin init (for safety; remove if running manually)
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
