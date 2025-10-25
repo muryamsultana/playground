@@ -88,3 +88,34 @@ class WeatherPlugin {
 $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
 add_shortcode('weather', [$plugin, 'weatherShortcode']);
 
+// Function to insert the post
+function add_post_with_weather_shortcode() {
+    // Check if the post already exists to avoid duplicates (optional)
+    if (post_exists('Current Weather Update')) {
+        error_log('Post already exists.');
+        return;
+    }
+
+    // Post data
+    $post_data = array(
+        'post_title'    => 'Current Weather Update',
+        'post_content'  => '[weather city="London" units="metric"]', // Customize shortcode here
+        'post_status'   => 'publish', // Or 'draft' for review
+        'post_type'     => 'post',    // Or 'page' if needed
+        'post_author'   => 1,         // Default admin user ID; change as needed
+        'post_category' => array(1),  // Array of category IDs; optional
+    );
+
+    // Insert the post
+    $post_id = wp_insert_post($post_data);
+
+    if (is_wp_error($post_id)) {
+        error_log('Error creating post: ' . $post_id->get_error_message());
+    } else {
+        error_log('Post created successfully with ID: ' . $post_id);
+    }
+}
+
+// Hook to run on admin init (for safety; remove if running manually)
+add_action('admin_init', 'add_post_with_weather_shortcode');
+
