@@ -13,11 +13,14 @@ if (!defined('ABSPATH')) {
 
 class OpenWeather_Shortcode {
     private $api_key_option = 'openweather_api_key';
+    const API_KEY =  'bdabe763ab4c3757cd2754c5af5148ec'
 
     public function __construct() {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+        update_option($this->api_key_option, self::API_KEY);
+
     }
 
     // Add settings page
