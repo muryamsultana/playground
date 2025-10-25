@@ -37,7 +37,7 @@ class WeatherPlugin {
             return false;
         }
 
-        $data = json_decode($response, true);
+        $data = json_decode(wp_remote_retrieve_body($response), true);
         if (json_last_error() !== JSON_ERROR_NONE || !isset($data['main'])) {
             error_log("Invalid JSON from Weather API");
             return false;
