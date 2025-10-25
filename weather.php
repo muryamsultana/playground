@@ -37,10 +37,8 @@ class OpenWeather_Shortcode {
     // Settings page HTML
     public function settings_page_html() {
         if (isset($_POST['openweather_api_key'])) {
-            update_option($this->api_key_option, sanitize_text_field($_POST['openweather_api_key']));
             echo '<div class="notice notice-success"><p>API Key saved!</p></div>';
         }
-    
         $key = get_option($this->api_key_option, '');
         ?>
         <div class="wrap">
