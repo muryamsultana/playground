@@ -69,7 +69,7 @@ class WeatherPlugin {
         </div>";
     }
     public function weatherShortcode($atts) {
-        $atts = shortcode_atts([
+$atts = shortcode_atts([
             'city' => 'London',
             'units' => 'metric',
         ], $atts, 'weather');
@@ -79,7 +79,15 @@ class WeatherPlugin {
         $units = in_array($atts['units'], $validUnits) ? $atts['units'] : 'metric';
 
         // Fetch weather data
-        return $this->displayWeather($this->getWeather($atts['city'], $units));
+        $weatherData = $this->getWeather($atts['city'], $units);
+        if ($weatherData) {
+            $weatherData['units'] = $units; // Pass units for rendering
+        }
+
+        // Enqueue styles
+        wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
+
+        return $this->displayWeather($weatherData);
   
        
     }
