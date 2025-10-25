@@ -128,7 +128,6 @@ if (is_wp_error($post_id)) {
 
 
 // Hook to run on admin init (for safety; remove if running manually)
-add_action('admin_init', 'add_post_with_weather_shortcode');
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
 ?>
