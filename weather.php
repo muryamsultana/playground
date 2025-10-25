@@ -64,13 +64,13 @@ $atts = shortcode_atts([
         $units = in_array($atts['units'], $validUnits) ? $atts['units'] : 'metric';
 
         // Fetch weather data
-        $weatherData = $this->getWeather($atts['city'], $units);
+       // $weatherData = $this->getWeather($atts['city'], $units);
   
         // Enqueue styles
         //wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
 
        // return $this->displayWeather($weatherData);
-        return "hello:";
+     echo  "hello:";
   
        
     }
