@@ -1,4 +1,4 @@
-    <?php
+<?php
 /*
 Plugin Name: PHP Weather Plugin using OpenWeatherMap API
 Description: API for waether
