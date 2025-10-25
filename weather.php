@@ -80,13 +80,35 @@ class WeatherPlugin {
             <p><strong>Humidity:</strong> {$humidity}%</p>
         </div>";
     }
+    public function weatherShortcode($atts) {
+        $atts = shortcode_atts([
+            'city' => 'London',
+            'units' => 'metric',
+        ], $atts, 'weather');
+
+        // Validate units
+        $validUnits = ['metric', 'imperial', 'standard'];
+        $units = in_array($atts['units'], $validUnits) ? $atts['units'] : 'metric';
+
+        // Fetch weather data
+        $weatherData = $this->getWeather($atts['city'], $units);
+        if ($weatherData) {
+            $weatherData['units'] = $units; // Pass units for rendering
+        }
+
+        // Enqueue styles
+        wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
+
+        return $this->renderWeather($weatherData);
+    }
+}
 }
 
 
-
 // Example Usage (uncomment and customize)
- $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
- add_shortcode('weather', [$plugin, 'getWeather']);
+$plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
+$atts = shortcode_atts(['city' => 'London'], $atts);
+add_shortcode('weather', [$plugin, 'weatherShortcode']);
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
 ?>
