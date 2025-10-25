@@ -1,7 +1,6 @@
 <?php
 /**
- * Simple PHP Weather Plugin using OpenWeatherMap API
- * 
+ * Plugin Name: PHP Weather Plugin using OpenWeatherMap API
  * @author Muryam
  * @version 1.0
  */
