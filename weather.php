@@ -1,10 +1,16 @@
 <?php
-/**
- * Plugin Name: PHP Weather Plugin using OpenWeatherMap API
- * @author Muryam
- * @version 1.0
- */
+/*
+Plugin Name: PHP Weather Plugin using OpenWeatherMap API
+Description: API for waether
+Version: 1.0.0
+Author: Muryam
+License: GPL-2.0+
+*/
 
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
 class WeatherPlugin {
     private $apiKey;
     private $apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
