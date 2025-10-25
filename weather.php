@@ -23,12 +23,9 @@ class WeatherPlugin {
         $url = $this->apiUrl . '?q=' . urlencode($city) . '&appid=' . $this->apiKey . '&units=' . $units;
 
         $resposne = wp_remote_get($url);
-
-        if (is_wp_error($response)) return 'Error fetching weather data'; 
         
         $data = json_decode(wp_remote_retrieve_body($response));
         
-        if (!$data || !isset($data->main)) return 'Invalid city';
     
         return $data;
     }
