@@ -39,7 +39,6 @@ class WeatherPlugin {
     }
 
     public function displayWeather($weatherData) {
-        print_r($weatherData);
         if (!$weatherData) {
             echo '<p class="weather-error">Unable to fetch weather data. Check your API key or city name.</p>';
             return;
