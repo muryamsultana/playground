@@ -136,5 +136,5 @@ class OpenWeather_Shortcode {
 }
 
 // Instantiate the class
-$plugin = new OpenWeather_Shortcode();
+new OpenWeather_Shortcode();
 ?>
