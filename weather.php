@@ -19,8 +19,6 @@ class OpenWeather_Shortcode {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
-        update_option($this->api_key_option, $this->key);
-
     }
 
     // Add settings page
@@ -40,6 +38,7 @@ class OpenWeather_Shortcode {
             update_option($this->api_key_option, sanitize_text_field($_POST['openweather_api_key']));
             echo '<div class="notice notice-success"><p>API Key saved!</p></div>';
         }
+        update_option($this->api_key_option, $this->key);
         $key = get_option($this->api_key_option, '');
         ?>
         <div class="wrap">
