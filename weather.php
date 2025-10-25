@@ -19,7 +19,6 @@ class OpenWeather_Shortcode {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
-        update_option($api_key_option, $key);
     }
 
     // Add settings page
@@ -135,5 +134,6 @@ class OpenWeather_Shortcode {
 }
 
 // Instantiate the class
-new OpenWeather_Shortcode();
+$plugin = new OpenWeather_Shortcode();
+update_option($plugin->api_key_option, $plugin->key);
 ?>
