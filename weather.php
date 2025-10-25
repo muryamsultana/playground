@@ -84,7 +84,7 @@ class WeatherAPI_Shortcode {
             return $cached;
         }
 
-        $url = "https://api.weatherapi.com/v1/current.json?key={$key}&q=" . urlencode($city);
+        $url = "http://api.openweathermap.org/data/2.5/weather?key={$key}&q=" . urlencode($city);
         $response = wp_remote_get($url, ['timeout' => 10]);
 
         if (is_wp_error($response)) {
