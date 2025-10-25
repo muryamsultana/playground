@@ -76,11 +76,12 @@ class WeatherPlugin {
         </div>";
     }
 }
-add_shortcode('weather', [$plugin, 'handleShortcode']);
+
 
 
 // Example Usage (uncomment and customize)
-// $plugin = new WeatherPlugin('YOUR_API_KEY_HERE');
+ $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
+ add_shortcode('weather', [$plugin, 'handleShortcode']);
 // $weather = $plugin->getWeather('London');
 // $plugin->displayWeather($weather);
 ?>
