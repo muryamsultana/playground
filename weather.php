@@ -102,7 +102,6 @@ class WeatherPlugin {
         return $this->renderWeather($weatherData);
     }
 }
-}
 
 
 // Example Usage (uncomment and customize)
