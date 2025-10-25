@@ -35,7 +35,7 @@ class WeatherPlugin {
             echo '<p class="weather-error">Unable to fetch weather data. Check your API key or city name.</p>';
             return;
         }
-
+/*
         $city = $weatherData['name'];
         $temp = $weatherData['main']['temp'];
         $description = $weatherData['weather'][0]['description'];
@@ -51,6 +51,7 @@ class WeatherPlugin {
             <p><strong>Conditions:</strong> {$description}</p>
             <p><strong>Humidity:</strong> {$humidity}%</p>
         </div>";
+        */
     }
     public function weatherShortcode($atts) {
 $atts = shortcode_atts([
