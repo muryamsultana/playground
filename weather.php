@@ -16,7 +16,6 @@ class OpenWeather_Shortcode {
     private $key =  'bdabe763ab4c3757cd2754c5af5148ec';
 
     public function __construct() {
-        add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
 
@@ -62,6 +61,7 @@ class OpenWeather_Shortcode {
 
     // Enqueue CSS
     public function enqueue_styles() {
+        add_action('admin_menu', [$this, 'add_settings_page']);
         wp_enqueue_style(
             'openweather-styles',
             plugin_dir_url(__FILE__) . 'openweather-styles.css',
