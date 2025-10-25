@@ -88,5 +88,3 @@ class WeatherPlugin {
 $plugin = new WeatherPlugin('bdabe763ab4c3757cd2754c5af5148ec');
 add_shortcode('weather', [$plugin, 'weatherShortcode']);
 
-
-?>
