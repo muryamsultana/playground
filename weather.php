@@ -96,9 +96,6 @@ class WeatherPlugin {
             $weatherData['units'] = $units; // Pass units for rendering
         }
 
-        // Enqueue styles
-        wp_enqueue_style('weather-plugin-style', plugin_dir_url(__FILE__) . 'weather-plugin.css');
-
         return $this->renderWeather($weatherData);
     }
 }
