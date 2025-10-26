@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: OpenWeather Shortcode
- * Description: Displays current weather via shortcode [openweather_city city="YourCity"] with beautiful styling.
+ * Description: Displays current weather via shortcode [weather city="YourCity"] with beautiful styling.
  * Version: 1.0
  * Author: Muryam
  */
