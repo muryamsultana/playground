@@ -16,10 +16,10 @@ class OpenWeather_Shortcode {
     private $key =  'bdabe763ab4c3757cd2754c5af5148ec';
 
     public function __construct() {
-         add_action('after_setup_theme', [$this, 'add_key']);
+        add_action('after_setup_theme', [$this, 'add_key']);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_shortcode('weather', [$this, 'shortcode_handler']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+        //add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
 
     }
     //add default key
