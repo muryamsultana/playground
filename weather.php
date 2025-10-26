@@ -3,7 +3,7 @@
  * Plugin Name: OpenWeather Shortcode
  * Description: Displays current weather via shortcode [openweather_city city="YourCity"] with beautiful styling.
  * Version: 1.0
- * Author: Grok Assistant
+ * Author: Muryam
  */
 
 // Prevent direct access
