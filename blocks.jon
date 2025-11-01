@@ -1,0 +1,167 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "theme": "twentytwentyfive",
+  "login": true,
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "runScript",
+      "script": "
+        // === PROCEDURAL PATTERN ENGINE v1 ===
+        const urlParams = new URLSearchParams(window.location.search);
+        const seed = urlParams.get('seed') || Date.now();
+        const rng = new Math.seedrandom(seed);
+
+        // Load seedrandom
+        if (typeof Math.seedrandom === 'undefined') {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js';
+          s.onload = initPatternEngine;
+          document.head.appendChild(s);
+        } else {
+          initPatternEngine();
+        }
+
+        function initPatternEngine() {
+          if (!wp?.blocks || !wp?.data) {
+            setTimeout(initPatternEngine, 500);
+            return;
+          }
+
+          const { registerBlockPattern, createBlock, serialize } = wp.blocks;
+          const { dispatch } = wp.data;
+
+          // === PALETTES & TYPOGRAPHY ===
+          const palettes = [
+            { bg: '#1a1a2e', accent: '#00ff88', text: '#ffffff' },
+            { bg: '#16213e', accent: '#ff6b6b', text: '#f0f0f0' },
+            { bg: '#0f3460', accent: '#e94560', text: '#ffffff' }
+          ];
+          const palette = palettes[Math.floor(rng() * palettes.length)];
+
+          const fonts = ['Inter', 'Space Grotesk', 'IBM Plex Mono'];
+          const font = fonts[Math.floor(rng() * fonts.length)];
+
+          // === PATTERN TEMPLATES ===
+          const generateHeroPattern = () => {
+            const words = ['Cosmos', 'Nebula', 'Void', 'Pulse', 'Echo', 'Flux'];
+            const title = `${words[Math.floor(rng() * words.length)]} ${words[Math.floor(rng() * words.length)]}`;
+            return [
+              createBlock('core/cover', {
+                url: `https://source.unsplash.com/1800x1000/?abstract,sig${Math.floor(rng() * 1000)}`,
+                dimRatio: 60,
+                overlayColor: 'black',
+                minHeight: 90,
+                minHeightUnit: 'vh',
+                style: { color: { background: palette.bg } }
+              }, [
+                createBlock('core/group', { layout: { type: 'constrained' } }, [
+                  createBlock('core/heading', {
+                    content: title,
+                    level: 1,
+                    style: { typography: { fontFamily: `var(--wp--preset--font-family--${font.toLowerCase().replace(/ /g, '-')})` } },
+                    textColor: 'white',
+                    fontSize: 'xx-large'
+                  }),
+                  createBlock('core/paragraph', {
+                    content: 'Procedurally generated hero. Seed: ' + seed,
+                    textColor: 'white'
+                  }),
+                  createBlock('core/buttons', {}, [
+                    createBlock('core/button', {
+                      text: 'Explore',
+                      backgroundColor: palette.accent,
+                      textColor: 'white'
+                    })
+                  ])
+                ])
+              ])
+            ];
+          };
+
+          const generateGridPattern = () => {
+            const cols = 2 + Math.floor(rng() * 2); // 2–3
+            return [
+              createBlock('core/columns', { isStackedOnMobile: true }, 
+                Array.from({ length: cols }, () => 
+                  createBlock('core/column', {}, [
+                    createBlock('core/image', {
+                      url: `https://source.unsplash.com/600x600/?art,${Math.floor(rng() * 1000)}`,
+                      alt: 'Art'
+                    }),
+                    createBlock('core/heading', { 
+                      content: 'Card ' + (Math.floor(rng() * 100) + 1),
+                      level: 3 
+                    }),
+                    createBlock('core/paragraph', { content: 'Dynamic content.' })
+                  ])
+                )
+              )
+            ];
+          };
+
+          const generateQuotePattern = () => {
+            const quotes = [
+              'Code is poetry. — WordPress',
+              'The future is procedural. — You',
+              'Randomness is the seed of creativity.'
+            ];
+            return [
+              createBlock('core/pullquote', {
+                value: quotes[Math.floor(rng() * quotes.length)],
+                citation: 'Procedural Engine',
+                style: { color: { background: palette.bg, text: palette.text } }
+              })
+            ];
+          };
+
+          // === REGISTER 10 PATTERNS ===
+          const patternIds = [];
+          for (let i = 0; i < 10; i++) {
+            const type = ['hero', 'grid', 'quote'][Math.floor(rng() * 3)];
+            const blocks = type === 'hero' ? generateHeroPattern() :
+                          type === 'grid' ? generateGridPattern() :
+                          generateQuotePattern();
+
+            const patternId = `procedural/pattern-${seed}-${i}`;
+            registerBlockPattern(patternId, {
+              title: `Procedural ${type.charAt(0).toUpperCase() + type.slice(1)} #${i + 1}`,
+              content: serialize(blocks),
+              categories: ['procedural'],
+              keywords: ['generated', 'random', 'seed']
+            });
+            patternIds.push(patternId);
+          }
+
+          // === INSERT RANDOM PATTERN INTO NEW PAGE ===
+          const randomPattern = patternIds[Math.floor(rng() * patternIds.length)];
+          const pageBlocks = [
+            createBlock('core/paragraph', { content: `<strong>Seed: ${seed}</strong> — <a href=\"?seed=${Math.floor(rng() * 99999)}\">Regenerate</a>` }),
+            createBlock('core/pattern', { slug: randomPattern })
+          ];
+
+          wp.apiFetch({
+            path: '/wp/v2/pages',
+            method: 'POST',
+            data: {
+              title: `Procedural Pattern Lab #${seed}`,
+              content: serialize(pageBlocks),
+              status: 'publish',
+              slug: `pattern-lab-${seed}`
+            }
+          }).then(page => {
+            window.location.href = page.link;
+          });
+        }
+      "
+    }
+  ]
+}
