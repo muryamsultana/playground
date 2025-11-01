@@ -4,8 +4,7 @@
     "php": "8.3",
     "wp": "latest"
   },
-  "theme": "twentytwentyfive",
-  "login": true,
+  "landingPage": "/pattern-lab-generated",
   "steps": [
     {
       "step": "login",
@@ -13,155 +12,21 @@
       "password": "password"
     },
     {
-      "step": "runScript",
-      "script": "
-        // === PROCEDURAL PATTERN ENGINE v1 ===
-        const urlParams = new URLSearchParams(window.location.search);
-        const seed = urlParams.get('seed') || Date.now();
-        const rng = new Math.seedrandom(seed);
-
-        // Load seedrandom
-        if (typeof Math.seedrandom === 'undefined') {
-          const s = document.createElement('script');
-          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js';
-          s.onload = initPatternEngine;
-          document.head.appendChild(s);
-        } else {
-          initPatternEngine();
-        }
-
-        function initPatternEngine() {
-          if (!wp?.blocks || !wp?.data) {
-            setTimeout(initPatternEngine, 500);
-            return;
-          }
-
-          const { registerBlockPattern, createBlock, serialize } = wp.blocks;
-          const { dispatch } = wp.data;
-
-          // === PALETTES & TYPOGRAPHY ===
-          const palettes = [
-            { bg: '#1a1a2e', accent: '#00ff88', text: '#ffffff' },
-            { bg: '#16213e', accent: '#ff6b6b', text: '#f0f0f0' },
-            { bg: '#0f3460', accent: '#e94560', text: '#ffffff' }
-          ];
-          const palette = palettes[Math.floor(rng() * palettes.length)];
-
-          const fonts = ['Inter', 'Space Grotesk', 'IBM Plex Mono'];
-          const font = fonts[Math.floor(rng() * fonts.length)];
-
-          // === PATTERN TEMPLATES ===
-          const generateHeroPattern = () => {
-            const words = ['Cosmos', 'Nebula', 'Void', 'Pulse', 'Echo', 'Flux'];
-            const title = `${words[Math.floor(rng() * words.length)]} ${words[Math.floor(rng() * words.length)]}`;
-            return [
-              createBlock('core/cover', {
-                url: `https://source.unsplash.com/1800x1000/?abstract,sig${Math.floor(rng() * 1000)}`,
-                dimRatio: 60,
-                overlayColor: 'black',
-                minHeight: 90,
-                minHeightUnit: 'vh',
-                style: { color: { background: palette.bg } }
-              }, [
-                createBlock('core/group', { layout: { type: 'constrained' } }, [
-                  createBlock('core/heading', {
-                    content: title,
-                    level: 1,
-                    style: { typography: { fontFamily: `var(--wp--preset--font-family--${font.toLowerCase().replace(/ /g, '-')})` } },
-                    textColor: 'white',
-                    fontSize: 'xx-large'
-                  }),
-                  createBlock('core/paragraph', {
-                    content: 'Procedurally generated hero. Seed: ' + seed,
-                    textColor: 'white'
-                  }),
-                  createBlock('core/buttons', {}, [
-                    createBlock('core/button', {
-                      text: 'Explore',
-                      backgroundColor: palette.accent,
-                      textColor: 'white'
-                    })
-                  ])
-                ])
-              ])
-            ];
-          };
-
-          const generateGridPattern = () => {
-            const cols = 2 + Math.floor(rng() * 2); // 2–3
-            return [
-              createBlock('core/columns', { isStackedOnMobile: true }, 
-                Array.from({ length: cols }, () => 
-                  createBlock('core/column', {}, [
-                    createBlock('core/image', {
-                      url: `https://source.unsplash.com/600x600/?art,${Math.floor(rng() * 1000)}`,
-                      alt: 'Art'
-                    }),
-                    createBlock('core/heading', { 
-                      content: 'Card ' + (Math.floor(rng() * 100) + 1),
-                      level: 3 
-                    }),
-                    createBlock('core/paragraph', { content: 'Dynamic content.' })
-                  ])
-                )
-              )
-            ];
-          };
-
-          const generateQuotePattern = () => {
-            const quotes = [
-              'Code is poetry. — WordPress',
-              'The future is procedural. — You',
-              'Randomness is the seed of creativity.'
-            ];
-            return [
-              createBlock('core/pullquote', {
-                value: quotes[Math.floor(rng() * quotes.length)],
-                citation: 'Procedural Engine',
-                style: { color: { background: palette.bg, text: palette.text } }
-              })
-            ];
-          };
-
-          // === REGISTER 10 PATTERNS ===
-          const patternIds = [];
-          for (let i = 0; i < 10; i++) {
-            const type = ['hero', 'grid', 'quote'][Math.floor(rng() * 3)];
-            const blocks = type === 'hero' ? generateHeroPattern() :
-                          type === 'grid' ? generateGridPattern() :
-                          generateQuotePattern();
-
-            const patternId = `procedural/pattern-${seed}-${i}`;
-            registerBlockPattern(patternId, {
-              title: `Procedural ${type.charAt(0).toUpperCase() + type.slice(1)} #${i + 1}`,
-              content: serialize(blocks),
-              categories: ['procedural'],
-              keywords: ['generated', 'random', 'seed']
-            });
-            patternIds.push(patternId);
-          }
-
-          // === INSERT RANDOM PATTERN INTO NEW PAGE ===
-          const randomPattern = patternIds[Math.floor(rng() * patternIds.length)];
-          const pageBlocks = [
-            createBlock('core/paragraph', { content: `<strong>Seed: ${seed}</strong> — <a href=\"?seed=${Math.floor(rng() * 99999)}\">Regenerate</a>` }),
-            createBlock('core/pattern', { slug: randomPattern })
-          ];
-
-          wp.apiFetch({
-            path: '/wp/v2/pages',
-            method: 'POST',
-            data: {
-              title: `Procedural Pattern Lab #${seed}`,
-              content: serialize(pageBlocks),
-              status: 'publish',
-              slug: `pattern-lab-${seed}`
-            }
-          }).then(page => {
-            window.location.href = page.link;
-          });
-        }
-      "
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "wordpress.org/themes",
+        "slug": "twentytwentyfive"
+      }
+    },
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "PROC_SEED": "777"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\n// Set seed from URL or fallback\n require_once('/wordpress/wp-load.php'); define('PROC_SEED', isset($_GET['seed']) ? sanitize_text_field($_GET['seed']) : time());\n\n// Enqueue JS only in admin\nadd_action('admin_enqueue_scripts', function($hook) {\n  if ($hook !== 'post-new.php' && $hook !== 'post.php') return;\n\n  $js = <<<JS\n<script>\n(function() {\n  const seed = PROC_SEED || '123';\n  let r = parseInt(seed, 10) % 2147483647 || 12345;\n  function rng() { r = (r * 16807) % 2147483647; return r / 2147483647; }\n\n  function wait() {\n    if (!wp?.blocks || !wp?.apiFetch) { setTimeout(wait, 800); return; }\n    run();\n  }\n\n  function getNonce() {\n    const s = document.querySelector('[data-wp-api-settings]') || document.querySelector('#wp-api-settings-js');\n    return s?.textContent.match(/nonce[\"']: [\"']([^\"']+)/)?.[1] || null;\n  }\n\n  function run() {\n    const { registerBlockPattern, createBlock, serialize } = wp.blocks;\n    const nonce = getNonce();\n    if (!nonce) return;\n\n    const p = [{bg:'#1a1a2e',a:'#00ff88'},{bg:'#16213e',a:'#ff6b6b'},{bg:'#0f3460',a:'#e94560'}][Math.floor(rng()*3)];\n    const w = ['Cosmos','Nebula','Void','Pulse','Echo','Flux'];\n\n    const h = () => serialize([createBlock('core/cover', {url:`https://source.unsplash.com/1800x1000/?abstract&sig=${Math.floor(rng()*1000)}`,dimRatio:60,minHeight:90,minHeightUnit:'vh',style:{color:{background:p.bg}}}, [\n      createBlock('core/group',{layout:{type:'constrained'}},[\n        createBlock('core/heading',{content:w[Math.floor(rng()*6)]+' '+w[Math.floor(rng()*6)],level:1,textColor:'white',fontSize:'xx-large'}),\n        createBlock('core/paragraph',{content:'Seed: '+seed,textColor:'white'}),\n        createBlock('core/buttons',{},[createBlock('core/button',{text:'Go',backgroundColor:p.a,textColor:'white'})])\n      ])\n    ])]);\n\n    const g = () => { const c=2+Math.floor(rng()*2); const cols=Array.from({length:c},()=>[\n      createBlock('core/image',{url:`https://source.unsplash.com/600x600/?art&sig=${Math.floor(rng()*1000)}`}),\n      createBlock('core/heading',{content:'Card '+Math.floor(rng()*100),level:3}),\n      createBlock('core/paragraph',{content:'Auto.'})\n    ]); return serialize([createBlock('core/columns',{},cols)]); };\n\n    const q = () => serialize([createBlock('core/pullquote',{value:['Code is poetry.','Seed it.','Art.'],citation:'Engine',style:{color:{background:p.bg,text:'#fff'}}})]);\n\n    const gens = [h, g, q]; const ids = [];\n    for(let i=0;i<10;i++){\n      const gen=gens[Math.floor(rng()*3)];\n      const type=gen===h?'Hero':gen===g?'Grid':'Quote';\n      const id=`proc/${type.toLowerCase()}-${seed}-${i}`;\n      registerBlockPattern(id,{title:`Proc ${type} #${i+1}`,content:gen(),categories:['procedural']});\n      ids.push(id);\n    }\n\n    const rand = ids[Math.floor(rng()*10)];\n    const page = serialize([\n      createBlock('core/paragraph',{content:`<strong>Seed: ${seed}</strong> — <a href=\"?seed=${Math.floor(rng()*99999)}\">New</a>`}),\n      createBlock('core/pattern',{slug:rand})\n    ]);\n\n    wp.apiFetch({path:'/wp/v2/pages',method:'POST',headers:{'X-WP-Nonce':nonce},data:{title:`Lab #${seed}`,content:page,status:'publish',slug:'pattern-lab-generated'}})\n      .then(p=>window.location.href=p.link);\n  }\n\n  wait();\n})();\n</script>\nJS;\n\n  wp_add_inline_script('wp-blocks', $js);\n});\n\n// Auto-open editor\nif (!get_option('proc_lab_opened')) {\n  update_option('proc_lab_opened', '1');\n  wp_redirect(admin_url('post-new.php?post_type=page'));\n  exit;\n}\n?>"
     }
   ]
 }
